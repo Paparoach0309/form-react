@@ -60,7 +60,7 @@ const App = () => {
 				<input onChange={e => firstNameHandler(e)} value={firstName} onBlur={e =>handlerBlur(e)} name='firstName' type='text' placeholder='Введите Ваше имя' ref={textInput}/>
 				{(lastNameDirty && lastNameError) && <div style={{color:'red'}}>{lastNameError}</div>}
 				<input onChange={e => lastNameHandler(e)} value={lastName} onBlur={e =>handlerBlur(e)} name='lastName' type='text' placeholder='Введите Вашу фамилию'/>
-				<button onClick={() => setModalActive(true)} type='submit' >Готово</button>
+				<button onClick={() => setModalActive(true)} type='submit' disabled={!formValid}>Готово</button>
 			</form>
 			<Modal active={modalActive} setActive={setModalActive} first={firstName} last={lastName}/>
 		</div>
