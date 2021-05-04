@@ -4,7 +4,6 @@ import './App.css';
 import Modal from './Modal.jsx';
 
 const App = () => {
-	const textInput = React.createRef();
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [firstNameDirty, setFirstNameDirty] = useState(false);
@@ -29,7 +28,6 @@ const App = () => {
 		} else {
 			setFirstNameError('');
 		}
-		console.log(textInput.current.value);
 	}
 
 	const lastNameHandler = (e) => {
@@ -55,12 +53,12 @@ const App = () => {
 
 	return (
 		<div className="App">
-			<form>
+			<form onSubmit={(e) => { e.preventDefault(); setModalActive(true) }}>
 				{(firstNameDirty && firstNameError) && <div style={{color:'red'}}>{firstNameError}</div>}
-				<input onChange={e => firstNameHandler(e)} value={firstName} onBlur={e =>handlerBlur(e)} name='firstName' type='text' placeholder='Введите Ваше имя' ref={textInput}/>
+				<input onChange={e => firstNameHandler(e)} value={firstName} onBlur={e =>handlerBlur(e)} name='firstName' type='text' placeholder='Введите Ваше имя'/>
 				{(lastNameDirty && lastNameError) && <div style={{color:'red'}}>{lastNameError}</div>}
 				<input onChange={e => lastNameHandler(e)} value={lastName} onBlur={e =>handlerBlur(e)} name='lastName' type='text' placeholder='Введите Вашу фамилию'/>
-				<button onClick={() => setModalActive(true)} type='submit' disabled={!formValid}>Готово</button>
+				<button type='submit' disabled={!formValid}>Готово</button>
 			</form>
 			<Modal active={modalActive} setActive={setModalActive} first={firstName} last={lastName}/>
 		</div>
